@@ -1,6 +1,6 @@
 const messages = [];
 //messagesObj {id, text, time}
-const id = 0;
+let id = 0;
 
 module.exports = {
 
@@ -22,7 +22,7 @@ module.exports = {
     update: (req, res) => {
         const { id } = req.params
         const { text } = req.body
-        let messageIndex = messages.findIndex(message => message.id === id)
+        let messageIndex = messages.findIndex(message => message.id === +id)
         let messageToUpdate = messages[messageIndex]
 
         messages[messageIndex] = {
@@ -43,7 +43,7 @@ module.exports = {
     delete: (req, res) => {
         const deleteId = req.params.id
         messageId = messages.findIndex(message => message.id === +deleteId)
-        messages.splice(messageIndex, 1)
+        messages.splice(messageId, 1)
         res.status(200).send(messages)
     }
 };
